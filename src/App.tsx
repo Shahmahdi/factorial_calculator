@@ -2,16 +2,21 @@ import React, { useState } from 'react';
 
 const App = () => {
 
-  const [enteredNumber, setEnteredNumber] = useState(undefined as any);
+  const [enteredNumber, setEnteredNumber] = useState(-1);
   const [error, setError] = useState('');
   const [result, setResult] = useState(0);
 
   const onSubmit = () => {
-    let result = 1;
-    for (let i = 2; i <= enteredNumber; i++) {
-      result = result * i;
+    if (enteredNumber > -1) {
+      let result = 1;
+      for (let i = 2; i <= enteredNumber; i++) {
+        result = result * i;
+      }
+      setResult(result);
+    } else {
+      setError('Please enter positive integer number');
+      setResult(0);
     }
-    setResult(result);
   }
 
   return (
@@ -32,7 +37,7 @@ const App = () => {
               setError('Number must be > or = to 0');
             } else {
               setError('');
-              setEnteredNumber(e.target.value)
+              setEnteredNumber(parseInt(e.target.value))
             }
           }}
         />
